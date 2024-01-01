@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fund.system.mapper.FundInfoMapper">
+    <resultMap id="BaseResultMap" type="com.fund.system.domain.FundInfo">
+        <constructor>
+            <idArg column="fund_id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+            <arg column="fund_code" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="fund_name" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="inception_date" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="management_fee" javaType="java.lang.Double" jdbcType="DOUBLE"/>
+            <arg column="subscription_fee" javaType="java.lang.Double" jdbcType="DOUBLE"/>
+            <arg column="switching_fee" javaType="java.lang.Double" jdbcType="DOUBLE"/>
+            <arg column="redemption_fee" javaType="java.lang.Double" jdbcType="DOUBLE"/>
+            <arg column="status" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="type" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
+        fund_id, fund_code, fund_name, inception_date, management_fee, subscription_fee, switching_fee,
+        redemption_fee, status, type
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from fund_info
+        where fund_id = #{id}
+    </select>
+    <select id="getCount" resultType="java.lang.Integer">
+        select count(*) from fund_info
+        where fund_code = #{fundCode,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from fund_info
+        where fund_id = #{id}
+    </delete>
+    <insert id="insert" parameterType="com.fund.system.domain.FundInfo">
+        insert into fund_info (fund_code, fund_name, inception_date,
+        management_fee, subscription_fee, switching_fee,
+        redemption_fee, status, type
+        )
+        values (#{fundCode,jdbcType=VARCHAR}, #{fundName,jdbcType=VARCHAR}, #{inceptionDate,jdbcType=VARCHAR},
+        #{managementFee,jdbcType=DOUBLE}, #{subscriptionFee,jdbcType=DOUBLE}, #{switchingFee,jdbcType=DOUBLE},
+        #{redemptionFee,jdbcType=DOUBLE}, #{status,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.fund.system.domain.FundInfo">
+        insert into fund_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="fundCode != null">
+                fund_code,
+            </if>
+            <if test="fundName != null">
+                fund_name,
+            </if>
+            <if test="inceptionDate != null">
+                inception_date,
+            </if>
+            <if test="managementFee != null">
+                management_fee,
+            </if>
+            <if test="subscriptionFee != null">
+                subscription_fee,
+            </if>
+            <if test="switchingFee != null">
+                switching_fee,
+            </if>
+            <if test="redemptionFee != null">
+                redemption_fee,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="fundCode != null">
+                #{fundCode,jdbcType=VARCHAR},
+            </if>
+            <if test="fundName != null">
+                #{fundName,jdbcType=VARCHAR},
+            </if>
+            <if test="inceptionDate != null">
+                #{inceptionDate,jdbcType=VARCHAR},
+            </if>
+            <if test="managementFee != null">
+                #{managementFee,jdbcType=DOUBLE},
+            </if>
+            <if test="subscriptionFee != null">
+                #{subscriptionFee,jdbcType=DOUBLE},
+            </if>
+            <if test="switchingFee != null">
+                #{switchingFee,jdbcType=DOUBLE},
+            </if>
+            <if test="redemptionFee != null">
+                #{redemptionFee,jdbcType=DOUBLE},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.fund.system.domain.FundInfo">
+        update fund_info
+        <set>
+            <if test="fundCode != null">
+                fund_code = #{fundCode,jdbcType=VARCHAR},
+            </if>
+            <if test="fundName != null">
+                fund_name = #{fundName,jdbcType=VARCHAR},
+            </if>
+            <if test="inceptionDate != null">
+                inception_date = #{inceptionDate,jdbcType=VARCHAR},
+            </if>
+            <if test="managementFee != null">
+                management_fee = #{managementFee,jdbcType=DOUBLE},
+            </if>
+            <if test="subscriptionFee != null">
+                subscription_fee = #{subscriptionFee,jdbcType=DOUBLE},
+            </if>
+            <if test="switchingFee != null">
+                switching_fee = #{switchingFee,jdbcType=DOUBLE},
+            </if>
+            <if test="redemptionFee != null">
+                redemption_fee = #{redemptionFee,jdbcType=DOUBLE},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                type = #{type,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where fund_id = #{fundId}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.fund.system.domain.FundInfo">
+        update fund_info
+        set fund_code = #{fundCode,jdbcType=VARCHAR},
+        fund_name = #{fundName,jdbcType=VARCHAR},
+        inception_date = #{inceptionDate,jdbcType=VARCHAR},
+        management_fee = #{managementFee,jdbcType=DOUBLE},
+        subscription_fee = #{subscriptionFee,jdbcType=DOUBLE},
+        switching_fee = #{switchingFee,jdbcType=DOUBLE},
+        redemption_fee = #{redemptionFee,jdbcType=DOUBLE},
+        status = #{status,jdbcType=VARCHAR},
+        type = #{type,jdbcType=VARCHAR}
+        where fund_id = #{fundId}
+    </update>
+
+    <select id="selectFundInfoList" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from fund_info
+        <where>
+            <if test="fundName != null">
+                and fund_name  like concat('%',#{fundName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="fundCode != null">
+                and fund_code like concat('%',#{fundCode,jdbcType=VARCHAR},'%')
+            </if>
+        </where>
+    </select>
+</mapper>

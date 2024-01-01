@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fund.system.mapper.FundInfoManagerMapper">
+  <resultMap id="BaseResultMap" type="com.fund.system.domain.FundInfoManager">
+    <constructor>
+      <arg column="fund_code" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="manager_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+    </constructor>
+  </resultMap>
+  <insert id="insert" parameterType="com.fund.system.domain.FundInfoManager">
+    insert into fund_info_manager (fund_code, manager_id)
+    values (#{fundCode,jdbcType=VARCHAR}, #{managerId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fund.system.domain.FundInfoManager">
+    insert into fund_info_manager
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fundCode != null">
+        fund_code,
+      </if>
+      <if test="managerId != null">
+        manager_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fundCode != null">
+        #{fundCode,jdbcType=VARCHAR},
+      </if>
+      <if test="managerId != null">
+        #{managerId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="update">
+    update fund_info_manager set fund_code =#{fundCode,jdbcType=VARCHAR} where manager_id =#{managerId,jdbcType=INTEGER}
+  </update>
+</mapper>

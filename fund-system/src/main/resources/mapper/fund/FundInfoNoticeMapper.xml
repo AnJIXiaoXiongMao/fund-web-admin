@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fund.system.mapper.FundInfoNoticeMapper">
+    <resultMap id="BaseResultMap" type="com.fund.system.domain.FundInfoNotice">
+        <constructor>
+            <arg column="fund_code" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="notice_id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+        </constructor>
+    </resultMap>
+    <insert id="insert" parameterType="com.fund.system.domain.FundInfoNotice">
+        insert into fund_info_notice (fund_code, notice_id)
+        values (#{fundCode,jdbcType=VARCHAR}, #{noticeId,jdbcType=INTEGER})
+    </insert>
+    <insert id="insertSelective" parameterType="com.fund.system.domain.FundInfoNotice">
+        insert into fund_info_notice
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="fundCode != null">
+                fund_code,
+            </if>
+            <if test="noticeId != null">
+                notice_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="fundCode != null">
+                #{fundCode,jdbcType=VARCHAR},
+            </if>
+            <if test="noticeId != null">
+                #{noticeId,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="update">
+        update fund_info_notice set fund_code =#{fundCode,jdbcType=VARCHAR} where notice_id =
+        #{noticeId,jdbcType=INTEGER}
+    </update>
+</mapper>

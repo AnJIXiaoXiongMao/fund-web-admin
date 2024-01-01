@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fund.system.mapper.FundNoticeMapper">
+  <resultMap id="BaseResultMap" type="com.fund.system.domain.FundNotice">
+    <constructor>
+      <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="title" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="type" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="path" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="publishdate" javaType="java.util.Date" jdbcType="DATE" />
+      <arg column="addtime" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="status" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, title, type, path, publishdate, addtime, status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from fund_notice
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from fund_notice
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.fund.system.domain.FundNotice" useGeneratedKeys="true" keyProperty="id">
+    insert into fund_notice (id, title, type, 
+      path, publishdate, addtime, 
+      status)
+    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
+      #{path,jdbcType=VARCHAR}, #{publishdate,jdbcType=DATE}, #{addtime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fund.system.domain.FundNotice" useGeneratedKeys="true" keyProperty="id">
+    insert into fund_notice
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="path != null">
+        path,
+      </if>
+      <if test="publishdate != null">
+        publishdate,
+      </if>
+      <if test="addtime != null">
+        addtime,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null">
+        #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="publishdate != null">
+        #{publishdate,jdbcType=DATE},
+      </if>
+      <if test="addtime != null">
+        #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fund.system.domain.FundNotice">
+    update fund_notice
+    <set>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null">
+        path = #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="publishdate != null">
+        publishdate = #{publishdate,jdbcType=DATE},
+      </if>
+      <if test="addtime != null">
+        addtime = #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fund.system.domain.FundNotice">
+    update fund_notice
+    set title = #{title,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      path = #{path,jdbcType=VARCHAR},
+      publishdate = #{publishdate,jdbcType=DATE},
+      addtime = #{addtime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+
+  <select id="getFundInfoNotice" resultType="com.fund.system.domain.rep.FundNoticeRep">
+    select fn.*,fin.fund_code as fundCode from fund_notice fn join fund_info_notice fin on fn.id = fin.notice_id
+    where fin.fund_code=#{fundCode}
+  </select>
+  <select id="getFundNoticeList" resultType="com.fund.system.domain.rep.FundNoticeRep">
+    select fn.*,fin.fund_code as fundCode from fund_notice fn join fund_info_notice fin on fn.id = fin.notice_id
+    <where>
+      <if test="title != null">
+        and fn.title  like concat('%',#{title,jdbcType=VARCHAR},'%')
+      </if>
+      <if test="fundCode != null">
+        and fin.fund_code like concat('%',#{fundCode,jdbcType=VARCHAR},'%')
+      </if>
+    </where>
+  </select>
+  <select id="getFundNoticeById" resultType="com.fund.system.domain.rep.FundNoticeRep">
+    select fn.*,fin.fund_code as fundCode from fund_notice fn join fund_info_notice fin on fn.id = fin.notice_id
+    where fn.id=#{id}
+  </select>
+</mapper>

@@ -15,11 +15,16 @@ import java.util.List;
  * @author yangkai
  * @since 2023-11-28
  */
-public interface IFundNoticeService{
+public interface IFundNoticeService {
     List<FundNoticeRep> getFundInfoNotice(String fundCode);
+
     String add(FundNoticeReq fundNoticeReq);
+
     String update(FundNoticeReq fundNoticeReq);
+
     List<FundNoticeRep> getFundNoticeList(FundNoticeReq fundNotice);
+
     FundNoticeRep getFundNoticeById(String id);
+
     String del(String id);
 }

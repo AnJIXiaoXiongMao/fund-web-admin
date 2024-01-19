@@ -2,11 +2,10 @@ package com.fund.common.constant;
 
 /**
  * 返回状态码
- * 
+ *
  * @author YangKai
  */
-public class HttpStatus
-{
+public class HttpStatus {
     /**
      * 操作成功
      */

@@ -1,180 +1,181 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fund.system.mapper.FundManagerMapper">
-  <resultMap id="BaseResultMap" type="com.fund.system.domain.FundManager">
-    <constructor>
-      <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="manager_name" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="job_time" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="qualification" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="biographical_notes" javaType="java.lang.String" jdbcType="VARCHAR" />
-    </constructor>
-  </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="com.fund.system.domain.FundManager">
-    <constructor>
-      <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="manager_name" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="job_time" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="qualification" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="biographical_notes" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="photo" javaType="java.lang.String" jdbcType="LONGVARCHAR" />
-    </constructor>
-  </resultMap>
-  <sql id="Base_Column_List">
-    id, manager_name, job_time, qualification, biographical_notes
-  </sql>
-  <sql id="Blob_Column_List">
-    photo
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
-    select 
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from fund_manager
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from fund_manager
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.fund.system.domain.FundManager" useGeneratedKeys="true" keyProperty="id">
-    insert into fund_manager (id, manager_name, job_time, 
-      qualification, biographical_notes, photo
-      )
-    values (#{id,jdbcType=INTEGER}, #{managerName,jdbcType=VARCHAR}, #{jobTime,jdbcType=VARCHAR}, 
-      #{qualification,jdbcType=VARCHAR}, #{biographicalNotes,jdbcType=VARCHAR}, #{photo,jdbcType=LONGVARCHAR}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="com.fund.system.domain.FundManager" useGeneratedKeys="true" keyProperty="id">
-    insert into fund_manager
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="managerName != null">
-        manager_name,
-      </if>
-      <if test="jobTime != null">
-        job_time,
-      </if>
-      <if test="qualification != null">
-        qualification,
-      </if>
-      <if test="biographicalNotes != null">
-        biographical_notes,
-      </if>
-      <if test="photo != null">
-        photo,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="managerName != null">
-        #{managerName,jdbcType=VARCHAR},
-      </if>
-      <if test="jobTime != null">
-        #{jobTime,jdbcType=VARCHAR},
-      </if>
-      <if test="qualification != null">
-        #{qualification,jdbcType=VARCHAR},
-      </if>
-      <if test="biographicalNotes != null">
-        #{biographicalNotes,jdbcType=VARCHAR},
-      </if>
-      <if test="photo != null">
-        #{photo,jdbcType=LONGVARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.fund.system.domain.FundManager">
-    update fund_manager
-    <set>
-      <if test="managerName != null">
-        manager_name = #{managerName,jdbcType=VARCHAR},
-      </if>
-      <if test="jobTime != null">
+    <resultMap id="BaseResultMap" type="com.fund.system.domain.FundManager">
+        <constructor>
+            <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+            <arg column="manager_name" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="job_time" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="qualification" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="biographical_notes" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        </constructor>
+    </resultMap>
+    <resultMap id="ResultMapWithBLOBs" type="com.fund.system.domain.FundManager">
+        <constructor>
+            <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+            <arg column="manager_name" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="job_time" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="qualification" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="biographical_notes" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="photo" javaType="java.lang.String" jdbcType="LONGVARCHAR"/>
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, manager_name, job_time, qualification, biographical_notes
+    </sql>
+    <sql id="Blob_Column_List">
+        photo
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from fund_manager
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from fund_manager
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.fund.system.domain.FundManager" useGeneratedKeys="true" keyProperty="id">
+        insert into fund_manager (id, manager_name, job_time,
+        qualification, biographical_notes, photo
+        )
+        values (#{id,jdbcType=INTEGER}, #{managerName,jdbcType=VARCHAR}, #{jobTime,jdbcType=VARCHAR},
+        #{qualification,jdbcType=VARCHAR}, #{biographicalNotes,jdbcType=VARCHAR}, #{photo,jdbcType=LONGVARCHAR}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.fund.system.domain.FundManager" useGeneratedKeys="true"
+            keyProperty="id">
+        insert into fund_manager
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="managerName != null">
+                manager_name,
+            </if>
+            <if test="jobTime != null">
+                job_time,
+            </if>
+            <if test="qualification != null">
+                qualification,
+            </if>
+            <if test="biographicalNotes != null">
+                biographical_notes,
+            </if>
+            <if test="photo != null">
+                photo,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="managerName != null">
+                #{managerName,jdbcType=VARCHAR},
+            </if>
+            <if test="jobTime != null">
+                #{jobTime,jdbcType=VARCHAR},
+            </if>
+            <if test="qualification != null">
+                #{qualification,jdbcType=VARCHAR},
+            </if>
+            <if test="biographicalNotes != null">
+                #{biographicalNotes,jdbcType=VARCHAR},
+            </if>
+            <if test="photo != null">
+                #{photo,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.fund.system.domain.FundManager">
+        update fund_manager
+        <set>
+            <if test="managerName != null">
+                manager_name = #{managerName,jdbcType=VARCHAR},
+            </if>
+            <if test="jobTime != null">
+                job_time = #{jobTime,jdbcType=VARCHAR},
+            </if>
+            <if test="qualification != null">
+                qualification = #{qualification,jdbcType=VARCHAR},
+            </if>
+            <if test="biographicalNotes != null">
+                biographical_notes = #{biographicalNotes,jdbcType=VARCHAR},
+            </if>
+            <if test="photo != null">
+                photo = #{photo,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.fund.system.domain.FundManager">
+        update fund_manager
+        set manager_name = #{managerName,jdbcType=VARCHAR},
         job_time = #{jobTime,jdbcType=VARCHAR},
-      </if>
-      <if test="qualification != null">
         qualification = #{qualification,jdbcType=VARCHAR},
-      </if>
-      <if test="biographicalNotes != null">
         biographical_notes = #{biographicalNotes,jdbcType=VARCHAR},
-      </if>
-      <if test="photo != null">
-        photo = #{photo,jdbcType=LONGVARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.fund.system.domain.FundManager">
-    update fund_manager
-    set manager_name = #{managerName,jdbcType=VARCHAR},
-      job_time = #{jobTime,jdbcType=VARCHAR},
-      qualification = #{qualification,jdbcType=VARCHAR},
-      biographical_notes = #{biographicalNotes,jdbcType=VARCHAR},
-      photo = #{photo,jdbcType=LONGVARCHAR}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.fund.system.domain.FundManager">
-    update fund_manager
-    set manager_name = #{managerName,jdbcType=VARCHAR},
-      job_time = #{jobTime,jdbcType=VARCHAR},
-      qualification = #{qualification,jdbcType=VARCHAR},
-      biographical_notes = #{biographicalNotes,jdbcType=VARCHAR},
-      photo = #{photo,jdbcType=LONGVARCHAR}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+        photo = #{photo,jdbcType=LONGVARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.fund.system.domain.FundManager">
+        update fund_manager
+        set manager_name = #{managerName,jdbcType=VARCHAR},
+        job_time = #{jobTime,jdbcType=VARCHAR},
+        qualification = #{qualification,jdbcType=VARCHAR},
+        biographical_notes = #{biographicalNotes,jdbcType=VARCHAR},
+        photo = #{photo,jdbcType=LONGVARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
 
-  <select id="getFundManager" resultType="com.fund.system.domain.rep.FundManagerRep">
-    SELECT
-    fm.id,
-    fm.manager_name AS managerName,
-    fm.job_time as jobTime,
-    fm.qualification,
-    fm.biographical_notes as biographicalNotes,
-    fm.photo,
-    fim.fund_code AS fundCode
-    FROM
-    fund_manager fm
-    JOIN fund_info_manager fim ON fm.id = fim.manager_id
-    where fim.fund_code=#{fundCode}
-  </select>
-  <select id="getFundManagerList" resultType="com.fund.system.domain.rep.FundManagerRep">
-    SELECT
-    fm.id,
-    fm.manager_name AS managerName,
-    fm.job_time as jobTime,
-    fm.qualification,
-    fm.biographical_notes as biographicalNotes,
-    fm.photo,
-    fim.fund_code AS fundCode
-    FROM
-    fund_manager fm
-    JOIN fund_info_manager fim ON fm.id = fim.manager_id
-    <where>
-      <if test="managerName != null">
-        and fm.manager_name  like concat('%',#{managerName,jdbcType=VARCHAR},'%')
-      </if>
-      <if test="fundCode != null">
-        and fim.fund_code like concat('%',#{fundCode,jdbcType=VARCHAR},'%')
-      </if>
-    </where>
-  </select>
-  <select id="getFundManagerById" resultType="com.fund.system.domain.rep.FundManagerRep">
-    SELECT
-    fm.id,
-    fm.manager_name AS managerName,
-    fm.job_time as jobTime,
-    fm.qualification,
-    fm.biographical_notes as biographicalNotes,
-    fm.photo,
-    fim.fund_code AS fundCode
-    FROM
-    fund_manager fm
-    JOIN fund_info_manager fim ON fm.id = fim.manager_id where fm.id=#{id}
-  </select>
+    <select id="getFundManager" resultType="com.fund.system.domain.rep.FundManagerRep">
+        SELECT
+        fm.id,
+        fm.manager_name AS managerName,
+        fm.job_time as jobTime,
+        fm.qualification,
+        fm.biographical_notes as biographicalNotes,
+        fm.photo,
+        fim.fund_code AS fundCode
+        FROM
+        fund_manager fm
+        JOIN fund_info_manager fim ON fm.id = fim.manager_id
+        where fim.fund_code=#{fundCode}
+    </select>
+    <select id="getFundManagerList" resultType="com.fund.system.domain.rep.FundManagerRep">
+        SELECT
+        fm.id,
+        fm.manager_name AS managerName,
+        fm.job_time as jobTime,
+        fm.qualification,
+        fm.biographical_notes as biographicalNotes,
+        fm.photo,
+        fim.fund_code AS fundCode
+        FROM
+        fund_manager fm
+        JOIN fund_info_manager fim ON fm.id = fim.manager_id
+        <where>
+            <if test="managerName != null">
+                and fm.manager_name like concat('%',#{managerName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="fundCode != null">
+                and fim.fund_code like concat('%',#{fundCode,jdbcType=VARCHAR},'%')
+            </if>
+        </where>
+    </select>
+    <select id="getFundManagerById" resultType="com.fund.system.domain.rep.FundManagerRep">
+        SELECT
+        fm.id,
+        fm.manager_name AS managerName,
+        fm.job_time as jobTime,
+        fm.qualification,
+        fm.biographical_notes as biographicalNotes,
+        fm.photo,
+        fim.fund_code AS fundCode
+        FROM
+        fund_manager fm
+        JOIN fund_info_manager fim ON fm.id = fim.manager_id where fm.id=#{id}
+    </select>
 </mapper>

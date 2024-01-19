@@ -157,7 +157,7 @@
         from fund_info
         <where>
             <if test="fundName != null">
-                and fund_name  like concat('%',#{fundName,jdbcType=VARCHAR},'%')
+                and fund_name like concat('%',#{fundName,jdbcType=VARCHAR},'%')
             </if>
             <if test="fundCode != null">
                 and fund_code like concat('%',#{fundCode,jdbcType=VARCHAR},'%')

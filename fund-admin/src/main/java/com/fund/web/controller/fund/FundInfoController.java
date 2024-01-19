@@ -5,12 +5,9 @@ import com.fund.common.core.controller.BaseController;
 import com.fund.common.core.domain.AjaxResult;
 import com.fund.common.core.page.TableDataInfo;
 import com.fund.system.domain.FundInfo;
-import com.fund.system.domain.SysConfig;
-import com.fund.system.domain.rep.FundInfoRep;
 import com.fund.system.domain.req.FundInfoReq;
 import com.fund.system.service.IFundInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,12 +28,12 @@ public class FundInfoController extends BaseController {
 
     @ResponseBody
     @PostMapping(value = "add")
-    public AjaxResult add( @RequestBody FundInfoReq fundInfoReq) {
+    public AjaxResult add(@RequestBody FundInfoReq fundInfoReq) {
         return success(fundInfoService.add(fundInfoReq));
     }
 
     @ResponseBody
-    @PutMapping(value ="update" )
+    @PutMapping(value = "update")
     public AjaxResult update(@RequestBody FundInfoReq fundInfoReq) {
         return success(fundInfoService.update(fundInfoReq));
     }
@@ -55,7 +52,7 @@ public class FundInfoController extends BaseController {
     }
 
     @GetMapping(value = "/getFundInfo/{fundId}")
-    public AjaxResult getFundInfo(@PathVariable String fundId){
+    public AjaxResult getFundInfo(@PathVariable String fundId) {
         return success(fundInfoService.getFundInfo(fundId));
     }
 }

@@ -21,7 +21,9 @@ public interface FundNoticeMapper {
     int updateByPrimaryKey(FundNotice row);
 
     List<FundNoticeRep> getFundInfoNotice(String fundCode);
+
     List<FundNoticeRep> getFundNoticeList(FundNoticeReq row);
+
     FundNoticeRep getFundNoticeById(String id);
 
 }

@@ -22,14 +22,6 @@ public class FundInfo extends BaseEntity {
 
     private String type;
 
-    public Integer getFundId() {
-        return fundId;
-    }
-
-    public void setFundId(Integer fundId) {
-        this.fundId = fundId;
-    }
-
     public FundInfo() {
         super();
     }
@@ -45,6 +37,14 @@ public class FundInfo extends BaseEntity {
         this.redemptionFee = redemptionFee;
         this.status = status;
         this.type = type;
+    }
+
+    public Integer getFundId() {
+        return fundId;
+    }
+
+    public void setFundId(Integer fundId) {
+        this.fundId = fundId;
     }
 
     public String getFundCode() {

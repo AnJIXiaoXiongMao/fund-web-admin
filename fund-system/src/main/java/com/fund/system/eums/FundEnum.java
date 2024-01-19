@@ -15,13 +15,6 @@ public class FundEnum {
             this.value = value;
         }
 
-        public String getValue() {
-            return value;
-        }
-
-        public String getCode() {
-            return code;
-        }
         public static FundTypeEnum codeOf(String code) {
             for (FundTypeEnum fundTypeEnum : values()) {
                 if (fundTypeEnum.getCode().equals(code)) {
@@ -29,6 +22,14 @@ public class FundEnum {
                 }
             }
             throw new RuntimeException("么有找到对应的枚举");
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        public String getCode() {
+            return code;
         }
     }
 
@@ -45,13 +46,6 @@ public class FundEnum {
             this.value = value;
         }
 
-        public String getValue() {
-            return value;
-        }
-
-        public String getCode() {
-            return code;
-        }
         public static FundNoticeTypeEnum codeOf(String code) {
             for (FundNoticeTypeEnum fundNoticeTypeEnum : values()) {
                 if (fundNoticeTypeEnum.getCode().equals(code)) {
@@ -59,6 +53,14 @@ public class FundEnum {
                 }
             }
             throw new RuntimeException("么有找到对应的枚举");
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        public String getCode() {
+            return code;
         }
     }
 }

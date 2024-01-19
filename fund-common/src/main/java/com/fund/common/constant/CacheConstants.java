@@ -2,11 +2,10 @@ package com.fund.common.constant;
 
 /**
  * 缓存的key 常量
- * 
+ *
  * @author YangKai
  */
-public class CacheConstants
-{
+public class CacheConstants {
     /**
      * 登录用户 redis key
      */

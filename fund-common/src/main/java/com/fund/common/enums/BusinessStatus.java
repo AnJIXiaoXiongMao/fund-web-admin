@@ -2,12 +2,10 @@ package com.fund.common.enums;
 
 /**
  * 操作状态
- * 
- * @author YangKai
  *
+ * @author YangKai
  */
-public enum BusinessStatus
-{
+public enum BusinessStatus {
     /**
      * 成功
      */

@@ -6,8 +6,7 @@ package com.fund.common.enums;
  * @author YangKai
  */
 
-public enum LimitType
-{
+public enum LimitType {
     /**
      * 默认策略全局限流
      */

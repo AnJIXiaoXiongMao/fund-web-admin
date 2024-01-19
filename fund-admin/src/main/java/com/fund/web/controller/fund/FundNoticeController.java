@@ -4,7 +4,6 @@ import com.fund.common.annotation.Anonymous;
 import com.fund.common.core.controller.BaseController;
 import com.fund.common.core.domain.AjaxResult;
 import com.fund.common.core.page.TableDataInfo;
-import com.fund.system.domain.FundNotice;
 import com.fund.system.domain.rep.FundNoticeRep;
 import com.fund.system.domain.req.FundNoticeReq;
 import com.fund.system.service.IFundNoticeService;
@@ -30,6 +29,21 @@ import java.util.Map;
 public class FundNoticeController extends BaseController {
     @Autowired
     private IFundNoticeService fundNoticeService;
+
+    private static void inputStreamToFile(InputStream ins, File file) {
+        try {
+            OutputStream os = new FileOutputStream(file);
+            int bytesRead = 0;
+            byte[] buffer = new byte[8192];
+            while ((bytesRead = ins.read(buffer, 0, 8192)) != -1) {
+                os.write(buffer, 0, bytesRead);
+            }
+            os.close();
+            ins.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     @RequestMapping("getFundInfoNotice")
     @ResponseBody
@@ -95,20 +109,5 @@ public class FundNoticeController extends BaseController {
             return success(map);
         }
         return error("上传异常，请联系管理员");
-    }
-
-    private static void inputStreamToFile(InputStream ins, File file) {
-        try {
-            OutputStream os = new FileOutputStream(file);
-            int bytesRead = 0;
-            byte[] buffer = new byte[8192];
-            while ((bytesRead = ins.read(buffer, 0, 8192)) != -1) {
-                os.write(buffer, 0, bytesRead);
-            }
-            os.close();
-            ins.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 }

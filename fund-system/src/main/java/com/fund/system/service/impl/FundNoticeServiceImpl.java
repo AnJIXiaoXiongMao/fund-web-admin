@@ -44,7 +44,7 @@ public class FundNoticeServiceImpl implements IFundNoticeService {
     }
 
     @Override
-    public String add(FundNoticeReq fundNoticeReq){
+    public String add(FundNoticeReq fundNoticeReq) {
         FundNotice fundNotice = new FundNotice();
         fundNotice.setTitle(fundNoticeReq.getTitle());
         fundNotice.setType(fundNoticeReq.getType());
@@ -73,7 +73,7 @@ public class FundNoticeServiceImpl implements IFundNoticeService {
         FundNotice fundNotice = new FundNotice();
         BeanUtils.copyProperties(fundNoticeReq, fundNotice);
         int resultCount = fundNoticeMapper.updateByPrimaryKeySelective(fundNotice);
-        if (resultCount>0) {
+        if (resultCount > 0) {
             FundInfoNotice fundInfoNotice = new FundInfoNotice();
             fundInfoNotice.setFundCode(fundNoticeReq.getFundCode());
             fundInfoNotice.setNoticeId(fundNoticeReq.getId());

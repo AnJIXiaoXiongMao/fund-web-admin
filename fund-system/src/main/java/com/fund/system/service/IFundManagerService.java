@@ -17,9 +17,14 @@ import java.util.List;
  */
 public interface IFundManagerService {
     List<FundManagerRep> getFundInfoManager(String fundCode);
+
     String add(FundManagerReq fundManagerReq);
+
     String update(FundManagerReq fundManagerReq);
+
     List<FundManagerRep> getFundManagerList(FundManagerReq fundManager);
+
     FundManagerRep getFundManager(String id);
+
     String del(String id);
 }

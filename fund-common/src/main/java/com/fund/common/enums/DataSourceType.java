@@ -2,11 +2,10 @@ package com.fund.common.enums;
 
 /**
  * 数据源
- * 
+ *
  * @author YangKai
  */
-public enum DataSourceType
-{
+public enum DataSourceType {
     /**
      * 主库
      */

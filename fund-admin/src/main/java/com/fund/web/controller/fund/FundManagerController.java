@@ -4,8 +4,6 @@ import com.fund.common.annotation.Anonymous;
 import com.fund.common.core.controller.BaseController;
 import com.fund.common.core.domain.AjaxResult;
 import com.fund.common.core.page.TableDataInfo;
-import com.fund.common.utils.file.FileUploadUtils;
-import com.fund.system.domain.FundManager;
 import com.fund.system.domain.rep.FundManagerRep;
 import com.fund.system.domain.req.FundManagerReq;
 import com.fund.system.service.IFundManagerService;
@@ -14,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
-import java.util.AbstractMap;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,6 +31,22 @@ public class FundManagerController extends BaseController {
     @Autowired
     private IFundManagerService fundManagerService;
 
+    //获取流文件
+    private static void inputStreamToFile(InputStream ins, File file) {
+        try {
+            OutputStream os = new FileOutputStream(file);
+            int bytesRead = 0;
+            byte[] buffer = new byte[8192];
+            while ((bytesRead = ins.read(buffer, 0, 8192)) != -1) {
+                os.write(buffer, 0, bytesRead);
+            }
+            os.close();
+            ins.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     @RequestMapping("getFundInfoManager")
     @ResponseBody
     public AjaxResult fundInfoManager(@RequestParam(value = "fundCode") String fundCode) {
@@ -46,7 +59,7 @@ public class FundManagerController extends BaseController {
         return success(fundManagerService.add(fundManagerReq));
     }
 
-    @PutMapping(value ="update" )
+    @PutMapping(value = "update")
     @ResponseBody
     public AjaxResult update(@RequestBody FundManagerReq fundManagerReq) {
         return success(fundManagerService.update(fundManagerReq));
@@ -59,15 +72,17 @@ public class FundManagerController extends BaseController {
         List<FundManagerRep> list = fundManagerService.getFundManagerList(fundManager);
         return getDataTable(list);
     }
+
     @DeleteMapping("/del/{id}")
     public AjaxResult del(@PathVariable String id) {
         return success(fundManagerService.del(id));
     }
 
     @GetMapping(value = "/getFundManager/{id}")
-    public AjaxResult getFundManager(@PathVariable String id){
+    public AjaxResult getFundManager(@PathVariable String id) {
         return success(fundManagerService.getFundManager(id));
     }
+
     @PostMapping(value = "upload")
     @ResponseBody
     @Anonymous
@@ -91,25 +106,10 @@ public class FundManagerController extends BaseController {
                     return error("上传异常，请联系管理员");
                 }
             }
-            Map<String,String> map =new HashMap<>(1);
-            map.put("photo",fileName);
+            Map<String, String> map = new HashMap<>(1);
+            map.put("photo", fileName);
             return success(map);
         }
         return error("上传异常，请联系管理员");
-    }
-    //获取流文件
-    private static void inputStreamToFile(InputStream ins, File file) {
-        try {
-            OutputStream os = new FileOutputStream(file);
-            int bytesRead = 0;
-            byte[] buffer = new byte[8192];
-            while ((bytesRead = ins.read(buffer, 0, 8192)) != -1) {
-                os.write(buffer, 0, bytesRead);
-            }
-            os.close();
-            ins.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 }

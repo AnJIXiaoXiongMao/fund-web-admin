@@ -7,5 +7,6 @@ public interface FundInfoNoticeMapper {
     int insert(FundInfoNotice row);
 
     int insertSelective(FundInfoNotice row);
+
     int update(FundInfoNotice row);
 }
